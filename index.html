@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tyson Prison Workout</title>
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- PWA Meta Tags -->
+<meta name="theme-color" content="#7a3018">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TYSON">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="description" content="Mike Tyson Prison Boxing Workout — Beginner to Professional. No equipment. No excuses.">
+
+<!-- Apple Touch Icons -->
+<link rel="apple-touch-icon" href="icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="72x72"   href="icons/icon-72x72.png">
+<link rel="apple-touch-icon" sizes="96x96"   href="icons/icon-96x96.png">
+<link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128x128.png">
+<link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
+<link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192x192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512x512.png">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32"   href="icons/icon-96x96.png">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0908;
+    --wall: #131110;
+    --cell: #1a1714;
+    --steel: #252220;
+    --rust: #7a3018;
+    --blood: #b02820;
+    --gold: #c89a10;
+    --chalk: #ddd8cc;
+    --faded: #6a6258;
+    --dim: #3a3530;
+    --green: #3a7a30;
+    --green-bright: #5aaa48;
+    --blue: #2a5a8a;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--chalk);
+    font-family: 'Oswald', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* PRISON WALL TEXTURE */
+  body::before {
+    content:'';
+    position: fixed; inset:0; z-index:0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(255,255,255,0.008) 60px, rgba(255,255,255,0.008) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 120px, rgba(255,255,255,0.005) 120px, rgba(255,255,255,0.005) 121px);
+    pointer-events:none;
+  }
+  body::after {
+    content:'';
+    position:fixed; inset:0; z-index:0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(122,48,24,0.08) 0%, transparent 60%);
+    pointer-events:none;
+  }
+  * { position:relative; z-index:1; }
+
+  /* ====== HERO ====== */
+  .hero {
+    background: var(--wall);
+    border-bottom: 3px solid var(--rust);
+    overflow: hidden;
+  }
+  .hero-stripe {
+    height: 5px;
+    background: repeating-linear-gradient(90deg, var(--rust) 0, var(--rust) 30px, var(--blood) 30px, var(--blood) 60px);
+    opacity: 0.6;
+  }
+  .hero-inner {
+    max-width: 980px; margin: 0 auto;
+    padding: 44px 24px 36px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: end;
+  }
+  .hero-left {}
+  .hero-eyebrow {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px; letter-spacing: 4px;
+    color: var(--rust); text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before { content:''; display:block; width:30px; height:1px; background:var(--rust); }
+  .hero-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(64px, 18vw, 130px);
+    line-height: 0.82;
+    color: var(--chalk);
+    letter-spacing: 3px;
+  }
+  .hero-title .accent { color: var(--gold); }
+  .hero-sub {
+    font-family: 'Special Elite', cursive;
+    font-size: clamp(12px, 2.5vw, 16px);
+    color: var(--faded);
+    margin-top: 14px;
+    line-height: 1.5;
+    max-width: 420px;
+  }
+  .hero-right {
+    text-align: right;
+    opacity: 0.12;
+    font-family: 'Special Elite', cursive;
+    font-size: 20px;
+    line-height: 2;
+    color: var(--chalk);
+    flex-shrink: 0;
+  }
+  .hero-stats {
+    max-width: 980px; margin: 0 auto;
+    padding: 0 24px 28px;
+    display: flex; gap: 0;
+    border-top: 1px solid var(--dim);
+    margin-top: 20px;
+  }
+  .hstat {
+    flex: 1; padding: 16px 0;
+    border-right: 1px solid var(--dim);
+    text-align: center;
+  }
+  .hstat:last-child { border-right: none; }
+  .hstat-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 32px; color: var(--gold); line-height: 1;
+  }
+  .hstat-label {
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--faded); margin-top: 3px; font-weight: 300;
+  }
+
+  /* ====== LEVEL TABS ====== */
+  .level-nav {
+    background: var(--wall);
+    border-bottom: 1px solid var(--dim);
+    display: flex; overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 20px;
+  }
+  .level-nav::-webkit-scrollbar { display:none; }
+  .lbtn {
+    flex-shrink:0; padding: 16px 22px;
+    background: none; border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--faded);
+    font-family: 'Bebas Neue', cursive;
+    font-size: 18px; letter-spacing: 2px;
+    cursor: pointer; transition: all .2s;
+    white-space: nowrap;
+  }
+  .lbtn:hover { color: var(--chalk); }
+  .lbtn.active { color: var(--gold); border-bottom-color: var(--gold); }
+  .lbtn .lsub {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 8px; font-weight: 300;
+    letter-spacing: 2px; color: var(--faded);
+    margin-top: -4px; text-transform: uppercase;
+  }
+
+  /* ====== MAIN ====== */
+  .main {
+    max-width: 980px; margin: 0 auto;
+    padding: 28px 20px 80px;
+  }
+
+  .lpanel { display: none; }
+  .lpanel.active { display: block; animation: fadeIn .3s ease; }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+  /* PHASE HEADER */
+  .phase-head {
+    display: flex; align-items: flex-end; gap: 16px;
+    margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .phase-big {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 90px; line-height: .8;
+    color: rgba(255,255,255,0.04); flex-shrink: 0;
+  }
+  .phase-info {}
+  .phase-eyebrow {
+    font-family: 'Special Elite', cursive;
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--rust); text-transform: uppercase; margin-bottom: 4px;
+  }
+  .phase-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: clamp(28px, 7vw, 52px);
+    color: var(--chalk); letter-spacing: 1px; line-height: 1;
+  }
+  .phase-desc {
+    font-family: 'Special Elite', cursive;
+    font-size: 12px; color: var(--faded);
+    line-height: 1.6; margin-top: 6px; max-width: 520px;
+  }
+
+  /* QUOTE */
+  .qblock {
+    border-left: 3px solid var(--rust);
+    padding: 12px 18px;
+    margin-bottom: 24px;
+    background: rgba(122,48,24,.06);
+  }
+  .qtext {
+    font-family: 'Special Elite', cursive;
+    font-size: 13px; color: var(--chalk);
+    line-height: 1.7; font-style: italic;
+  }
+  .qattr {
+    font-size: 9px; letter-spacing: 3px;
+    color: var(--rust); text-transform: uppercase;
+    margin-top: 7px;
+    font-family: 'Oswald', sans-serif; font-weight: 300;
+  }
+
+  /* ====== WEEK SELECTOR ====== */
+  .week-tabs {
+    display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap;
+  }
+  .wbtn {
+    padding: 8px 14px;
+    background: var(--cell);
+    border: 1px solid var(--dim);
+    color: var(--faded);
+    font-family: 'Bebas Neue', cursive;
+    font-size: 15px; letter-spacing: 1px;
+    cursor: pointer; transition: all .15s;
+    white-space: nowrap;
+  }
+  .wbtn:hover { color: var(--chalk); border-color: var(--steel); }
+  .wbtn.active { color: var(--gold); border-color: var(--rust); background: rgba(122,48,24,.1); }
+  .wday-label { display: block; font-size: 8px; font-family: 'Oswald', sans-serif; font-weight: 300; letter-spacing: 1px; color: var(--faded); }
+
+  .wday-panel { display: none; }
+  .wday-panel.active { display: block; animation: fadeIn .25s ease; }
+
+  /* ====== DAY LAYOUT ====== */
+  .day-summary-bar {
+    background: var(--wall);
+    border: 1px solid var(--dim);
+    border-left: 4px solid var(--rust);
+    padding: 14px 20px;
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+  .dsb-title {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 20px; letter-spacing: 1px; color: var(--chalk);
+    flex: 1;
+  }
+  .dsb-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    padding: 3px 10px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+    border-radius: 1px;
+  }
+  .pill-red { background: rgba(176,40,32,.2); color: #e05048; border:1px solid rgba(176,40,32,.3); }
+  .pill-gold { background: rgba(200,154,16,.15); color: var(--gold); border:1px solid rgba(200,154,16,.25); }
+  .pill-green { background: rgba(58,122,48,.2); color: var(--green-bright); border:1px solid rgba(58,122,48,.3); }
+  .pill-gray { background: rgba(255,255,255,.06); color: var(--faded); border:1px solid var(--dim); }
+
+  /* SESSION BLOCKS */
+  .sessions { display: flex; flex-direction: column; gap: 8px; }
+
+  .sblock {
+    background: var(--wall);
+    border: 1px solid var(--dim);
+    overflow: hidden;
+  }
+  .sblock.type-sleep { border-left: 4px solid #1a3a5a; }
+  .sblock.type-run   { border-left: 4px solid var(--green); }
+  .sblock.type-work  { border-left: 4px solid var(--blood); }
+  .sblock.type-shadow{ border-left: 4px solid var(--gold); }
+  .sblock.type-cond  { border-left: 4px solid var(--rust); }
+  .sblock.type-rest  { border-left: 4px solid var(--dim); }
+  .sblock.type-eat   { border-left: 4px solid #3a5a2a; }
+  .sblock.type-prison{ border-left: 4px solid #4a3a2a; }
+
+  .shead {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    align-items: center; gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .shead:hover { background: rgba(255,255,255,.02); }
+
+  .stime {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 14px; color: var(--gold);
+    letter-spacing: 1px; line-height: 1.2;
+  }
+  .sdur {
+    font-family: 'Oswald', sans-serif;
+    font-size: 9px; font-weight: 300;
+    color: var(--faded); letter-spacing: 1px;
+    text-transform: uppercase; margin-top: 2px;
+  }
+
+  .stitle-wrap {}
+  .stitle {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600; font-size: 13px;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--chalk);
+  }
+  .stitle-note {
+    font-family: 'Special Elite', cursive;
+    font-size: 10px; color: var(--faded);
+    margin-top: 2px; font-style: italic;
+  }
+
+  .smeta {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .stype-icon { font-size: 18px; opacity: .7; }
+  .sarrow {
+    font-size: 12px; color: var(--faded);
+    transition: transform .2s;
+    flex-shrink: 0;
+  }
+  .sblock.open .sarrow { transform: rotate(180deg); }
+
+  /* SESSION BODY */
+  .sbody {
+    display: none;
+    padding: 0 16px 14px;
+    border-top: 1px solid rgba(255,255,255,.04);
+  }
+  .sblock.open .sbody { display: block; }
+
+  /* EXERCISE TABLE */
+  .etable { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .etable tr { border-bottom: 1px solid rgba(255,255,255,.04); }
+  .etable tr:last-child { border-bottom: none; }
+  .etable tr:hover td { background: rgba(255,255,255,.015); }
+  .erow-num {
+    padding: 7px 10px 7px 0;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 16px; color: rgba(200,154,16,.35);
+    width: 28px; vertical-align: top;
+  }
+  .ename {
+    padding: 7px 6px;
+    font-size: 12.5px; color: var(--chalk);
+    font-weight: 400; vertical-align: top;
+  }
+  .ename small {
+    display: block; font-size: 10px;
+    color: var(--faded); font-weight: 300;
+    font-family: 'Special Elite', cursive;
+    font-style: italic; margin-top: 1px;
+  }
+  .ereps {
+    padding: 7px 0 7px 6px;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 17px; color: var(--blood);
+    text-align: right; white-space: nowrap;
+    vertical-align: top;
+  }
+  .enote {
+    padding: 7px 0 7px 10px;
+    font-size: 9px; color: var(--faded);
+    font-style: italic;
+    font-family: 'Special Elite', cursive;
+    text-align: right; vertical-align: top;
+    white-space: nowrap;
+  }
+
+  /* REST ROW */
+  .rest-row {
+    padding: 10px 0;
+    font-family: 'Special Elite', cursive;
+    font-size: 12px; color: var(--faded);
+    line-height: 1.6;
+    font-style: italic;
+  }
+  .rest-row strong { color: var(--green-bright); font-style: normal; }
+
+  /* DAY TOTAL */
+  .day-total {
+    display: grid; grid-template-columns: repeat(4,1fr);
+    gap: 1px; background: var(--dim);
+    border: 1px solid var(--dim);
+    margin-top: 14px;
+  }
+  .dt-item {
+    background: var(--wall);
+    padding: 12px 10px; text-align: center;
+  }
+  .dt-num {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 26px; color: var(--gold); line-height: 1;
+  }
+  .dt-label {
+    font-size: 8px; letter-spacing: 1.5px;
+    text-transform: uppercase; color: var(--faded);
+    margin-top: 2px; font-weight: 300;
+  }
+
+  @media (max-width: 560px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .shead { grid-template-columns: 100px 1fr auto; }
+    .day-total { grid-template-columns: repeat(2,1fr); }
+    .hstat-num { font-size: 24px; }
+  }
+
+  /* ====== PWA INSTALL BANNER ====== */
+  #pwa-banner {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+    background: var(--wall);
+    border-top: 2px solid var(--rust);
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 14px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.6);
+  }
+  #pwa-banner.show { transform: translateY(0); }
+  .pwa-icon { font-size: 28px; flex-shrink: 0; }
+  .pwa-text { flex: 1; }
+  .pwa-text strong {
+    display: block;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 16px; letter-spacing: 1px;
+    color: var(--chalk);
+  }
+  .pwa-text span {
+    font-size: 11px; color: var(--faded);
+    font-family: 'Special Elite', cursive;
+  }
+  .pwa-install-btn {
+    padding: 8px 18px;
+    background: var(--rust);
+    border: none; color: var(--chalk);
+    font-family: 'Bebas Neue', cursive;
+    font-size: 14px; letter-spacing: 2px;
+    cursor: pointer; flex-shrink: 0;
+    transition: background .15s;
+  }
+  .pwa-install-btn:hover { background: var(--blood); }
+  .pwa-dismiss-btn {
+    background: none; border: none;
+    color: var(--faded); font-size: 20px;
+    cursor: pointer; padding: 4px;
+    flex-shrink: 0; line-height: 1;
+  }
+
+  /* ====== UPDATE TOAST ====== */
+  #sw-toast {
+    position: fixed; top: 16px; right: 16px; z-index: 9999;
+    background: var(--wall); border: 1px solid var(--rust);
+    padding: 12px 16px; max-width: 280px;
+    display: none; align-items: center; gap: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  #sw-toast.show { display: flex; }
+  .toast-text { font-size: 12px; color: var(--chalk); font-family: 'Special Elite', cursive; }
+  .toast-btn {
+    padding: 5px 12px; background: var(--rust);
+    border: none; color: var(--chalk);
+    font-family: 'Oswald', sans-serif; font-size: 11px;
+    letter-spacing: 1px; cursor: pointer; white-space: nowrap;
+  }
+
+  /* iOS Safe Area */
+  .footer { padding-bottom: max(28px, env(safe-area-inset-bottom)); }
+
+  /* ====== CHECKLIST ====== */
+  .sblock.done { opacity: 0.55; }
+  .sblock.done .shead { background: rgba(58,122,48,0.06); }
+  .sblock.done .stitle { text-decoration: line-through; color: var(--faded); }
+  .sblock.done .stime { color: var(--faded); }
+
+  .check-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; flex-shrink: 0;
+    border-radius: 2px;
+    border: 2px solid var(--dim);
+    background: transparent;
+    cursor: pointer;
+    transition: all .15s;
+    color: transparent;
+    font-size: 14px;
+    margin-left: 4px;
+  }
+  .check-btn:hover { border-color: var(--green-bright); color: var(--green-bright); }
+  .sblock.done .check-btn {
+    border-color: var(--green);
+    background: rgba(58,122,48,0.25);
+    color: var(--green-bright);
+  }
+
+  /* EXERCISE ROW CHECKLIST */
+  .erow-check {
+    width: 22px; padding: 7px 4px 7px 0; vertical-align: top;
+  }
+  .echeck {
+    display: flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--dim);
+    border-radius: 2px;
+    cursor: pointer;
+    background: transparent;
+    transition: all .15s;
+    font-size: 11px; color: transparent;
+    margin-top: 1px; flex-shrink: 0;
+  }
+  .echeck:hover { border-color: var(--green-bright); color: rgba(90,170,72,0.5); }
+  .echeck.checked {
+    border-color: var(--green);
+    background: rgba(58,122,48,0.2);
+    color: var(--green-bright);
+  }
+  tr.ex-done .ename { text-decoration: line-through; color: var(--faded); }
+  tr.ex-done .ereps { color: var(--faded); opacity: 0.5; }
+
+  /* PROGRESS BAR */
+  .day-progress {
+    margin-bottom: 14px;
+    background: var(--wall);
+    border: 1px solid var(--dim);
+    padding: 12px 16px;
+  }
+  .dp-top {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .dp-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--faded);
+    font-weight: 300;
+  }
+  .dp-pct {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 18px; color: var(--gold); line-height: 1;
+  }
+  .dp-pct.full { color: var(--green-bright); }
+  .dp-bar-bg {
+    height: 4px; background: var(--dim); border-radius: 2px; overflow: hidden;
+  }
+  .dp-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--rust), var(--gold));
+    border-radius: 2px;
+    transition: width .4s ease;
+    width: 0%;
+  }
+  .dp-bar-fill.full { background: linear-gradient(90deg, var(--green), var(--green-bright)); }
+
+  /* RESET BTN */
+  .reset-day-btn {
+    margin-top: 10px;
+    padding: 5px 14px;
+    background: transparent;
+    border: 1px solid var(--dim);
+    color: var(--faded);
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .15s;
+    border-radius: 1px;
+  }
+  .reset-day-btn:hover { border-color: var(--rust); color: var(--blood); }
+
+  /* DONE BADGE on week tabs */
+  .wbtn .done-dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green-bright);
+    margin-left: 5px;
+    vertical-align: middle;
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .wbtn.all-done .done-dot { opacity: 1; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-stripe"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Ohio Correctional Institution · 1992–1995</div>
+      <div class="hero-title">MIKE<br><span class="accent">TYSON</span><br>PRISON</div>
+      <div class="hero-sub">Tidak ada gym. Tidak ada equipment. Tidak ada alasan. Sel 2×3 meter adalah satu-satunya tempat latihan. Waktu kosong adalah musuh — jadikan latihan.</div>
+    </div>
+    <div class="hero-right">
+      IIII IIII IIII<br>IIII IIII IIII<br>IIII IIII IIII<br>IIII IIII II
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat"><div class="hstat-num">20–22</div><div class="hstat-label">Jam Aktif / Hari</div></div>
+    <div class="hstat"><div class="hstat-num">2000</div><div class="hstat-label">Sit-up / Hari (Pro)</div></div>
+    <div class="hstat"><div class="hstat-num">500</div><div class="hstat-label">Push-up / Hari (Pro)</div></div>
+    <div class="hstat"><div class="hstat-num">0</div><div class="hstat-label">Equipment</div></div>
+    <div class="hstat"><div class="hstat-num">6</div><div class="hstat-label">Hari Latihan / Minggu</div></div>
+  </div>
+  <div class="hero-stripe"></div>
+</div>
+
+<!-- LEVEL TABS -->
+<div class="level-nav">
+  <button class="lbtn active" data-level="beg">BEGINNER<span class="lsub">Bulan 1–3</span></button>
+  <button class="lbtn" data-level="int">INTERMEDIATE<span class="lsub">Bulan 4–6</span></button>
+  <button class="lbtn" data-level="adv">ADVANCED<span class="lsub">Bulan 7–9</span></button>
+  <button class="lbtn" data-level="pro">TYSON MODE<span class="lsub">Bulan 10–12+</span></button>
+</div>
+
+<div class="main">
+
+<!-- ================================================================
+     BEGINNER
+================================================================ -->
+<div class="lpanel active" id="lp-beg">
+  <div class="phase-head">
+    <div class="phase-big">01</div>
+    <div class="phase-info">
+      <div class="phase-eyebrow">// Fase Pertama — Bulan 1–3</div>
+      <div class="phase-title">Beginner — Orientasi Sel</div>
+      <div class="phase-desc">Baru masuk penjara. Tubuh belum terbiasa. Tapi waktu tidak berhenti — sel kosong 16+ jam sehari. Latihan dibagi sesi kecil sepanjang hari dengan istirahat yang cukup.</div>
+    </div>
+  </div>
+  <div class="qblock">
+    <div class="qtext">"Tidak ada TV, tidak ada HP, tidak ada teman. Hanya tembok dan lantai. Jadi aku memilih untuk menjadikan tubuhku sebagai proyeknya."</div>
+    <div class="qattr">— Mike Tyson</div>
+  </div>
+
+  <div class="week-tabs" id="wtabs-beg"></div>
+  <div id="wdays-beg"></div>
+</div>
+
+<!-- ================================================================
+     INTERMEDIATE
+================================================================ -->
+<div class="lpanel" id="lp-int">
+  <div class="phase-head">
+    <div class="phase-big">02</div>
+    <div class="phase-info">
+      <div class="phase-eyebrow">// Fase Kedua — Bulan 4–6</div>
+      <div class="phase-title">Intermediate — Ritme Terbentuk</div>
+      <div class="phase-desc">Tubuh sudah terbiasa. Sekarang volume naik, sesi lebih panjang, dan shadow boxing mulai punya dimensi fight simulation. Waktu kerja penjara tetap ada — sisanya latihan semua.</div>
+    </div>
+  </div>
+  <div class="qblock">
+    <div class="qtext">"Mereka bisa mengurung tubuhku, tapi tidak bisa mengurung semangatku untuk berlatih."</div>
+    <div class="qattr">— Mike Tyson</div>
+  </div>
+  <div class="week-tabs" id="wtabs-int"></div>
+  <div id="wdays-int"></div>
+</div>
+
+<!-- ================================================================
+     ADVANCED
+================================================================ -->
+<div class="lpanel" id="lp-adv">
+  <div class="phase-head">
+    <div class="phase-big">03</div>
+    <div class="phase-info">
+      <div class="phase-eyebrow">// Fase Ketiga — Bulan 7–9</div>
+      <div class="phase-title">Advanced — Kondisi Fighter</div>
+      <div class="phase-desc">Volume harian mendekati Tyson asli. Tubuh sudah seperti mesin. Setiap jam bebas di sel adalah waktu latihan. Istirahat aktif diisi visualisasi dan teknik.</div>
+    </div>
+  </div>
+  <div class="qblock">
+    <div class="qtext">"Di sini tidak ada yang bisa menghentikanku. Satpam tidak bisa. Tembok tidak bisa. Hanya diriku sendiri yang bisa melemah — dan aku tidak akan membiarkan itu terjadi."</div>
+    <div class="qattr">— Mike Tyson</div>
+  </div>
+  <div class="week-tabs" id="wtabs-adv"></div>
+  <div id="wdays-adv"></div>
+</div>
+
+<!-- ================================================================
+     PRO — TYSON MODE
+================================================================ -->
+<div class="lpanel" id="lp-pro">
+  <div class="phase-head">
+    <div class="phase-big">04</div>
+    <div class="phase-info">
+      <div class="phase-eyebrow">// Protokol Asli — Bulan 10–12+</div>
+      <div class="phase-title">Tyson Mode — Protokol Penjara Asli</div>
+      <div class="phase-desc">Ini yang benar-benar Tyson lakukan. Bangun jam 4 pagi. Latihan sampai malam. Semua waktu kosong di sel diisi latihan. 2000 sit-up, 500 push-up, 500 dip SETIAP HARI. Tidak ada hari mudah.</div>
+    </div>
+  </div>
+  <div class="qblock">
+    <div class="qtext">"Aku keluar dari penjara dalam kondisi terbaik dalam hidupku. Karena di dalam, tidak ada yang bisa kulakukan selain latihan dan membaca."</div>
+    <div class="qattr">— Mike Tyson</div>
+  </div>
+  <div class="week-tabs" id="wtabs-pro"></div>
+  <div id="wdays-pro"></div>
+</div>
+
+</div><!-- end main -->
+
+<div class="footer">
+  Berdasarkan protokol latihan Mike Tyson di Ohio Correctional Institution · 1992–1995 · No equipment. No excuses. No way out.
+</div>
+
+<!-- PWA Install Banner -->
+<div id="pwa-banner">
+  <div class="pwa-icon">🥊</div>
+  <div class="pwa-text">
+    <strong>Install Tyson Workout</strong>
+    <span>Pasang ke HP — bisa dipakai offline</span>
+  </div>
+  <button class="pwa-install-btn" id="pwa-install-btn">INSTALL</button>
+  <button class="pwa-dismiss-btn" id="pwa-dismiss-btn">✕</button>
+</div>
+
+<!-- SW Update Toast -->
+<div id="sw-toast">
+  <div class="toast-text">Update tersedia!</div>
+  <button class="toast-btn" id="sw-update-btn">RELOAD</button>
+</div>
+
+<script>
+// ======================================================
+// DATA
+// ======================================================
+
+const DAYS = ['Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu'];
+const DAYS_EN = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+// --- SESSION TYPES ---
+// type: sleep|run|shadow|cond|eat|prison|rest
+// sessions: [{time, dur, title, note, type, icon, exercises:[{name,small,reps,note}], restText}]
+
+function S(time, dur, title, note, type, icon, exercises, restText) {
+  return {time, dur, title, note, type, icon, exercises: exercises||[], restText: restText||null};
+}
+function E(name, sm, reps, note) { return {name,sm,reps,note}; }
+
+// ======================================================
+// BEGINNER DATA
+// ======================================================
+const BEG = [
+  // Senin
+  [
+    S('04:00','30 mnt','Bangun & Cuci Muka','Rutinkan bangun jam 4 — Tyson tidak pernah tidur lewat fajar','sleep','🌑',[], 'Bangun, cuci muka dengan air dingin. Tyson percaya air dingin membangunkan pikiran dan tubuh sekaligus.'),
+    S('04:30–05:10','40 mnt','Lari Pagi di Lapangan','Narapidana diizinkan keluar pagi 1–2 jam untuk "yard time"','run','🏃',[
+      E('Lari keliling lapangan penjara','Pace santai, bangun aerobik base','20 mnt','jangan sprint'),
+      E('Jalan cepat','Turunkan detak jantung','10 mnt',''),
+      E('Stretching ringan','Leher, bahu, pinggul, kaki','10 mnt',''),
+    ]),
+    S('05:10–06:00','50 mnt','Kembali ke Sel — Sesi 1: Push-up','Segera latihan setelah kembali ke sel','cond','💪',[
+      E('Jumping Jack','Warmup','3 × 20','istirahat 30 dtk'),
+      E('Push-up Standar','Form sempurna — dada menyentuh lantai','5 × 15','istirahat 60 dtk'),
+      E('Wide Push-up','Tangan lebih lebar dari bahu','3 × 10','istirahat 60 dtk'),
+      E('Rest 5 menit di sel',null,'','berbaring, atur napas'),
+      E('Push-up lagi','Ulangi satu set terakhir','2 × 15','istirahat 60 dtk'),
+    ]),
+    S('06:00–07:00','60 mnt','Sit-up Marathon Sesi 1','Core adalah fondasi power Tyson','cond','🔥',[
+      E('Sit-up Standar','Tyson lakukan ini ribuan kali. Mulai 100 dulu','10 × 10','istirahat 45 dtk'),
+      E('Leg Raise','Kaki lurus, angkat 90°','3 × 10','istirahat 45 dtk'),
+      E('Bicycle Crunch','Pelan terkontrol','3 × 15','istirahat 30 dtk'),
+    ]),
+    S('07:00–07:30','30 mnt','Makan Pagi (Penjara)','Makanan penjara biasanya oatmeal, roti, kadang telur','eat','🍽️',[], 'Makan semua yang disediakan. Di penjara tidak ada pilihan menu. Tyson makan apapun karena tahu tubuh butuh kalori untuk latihan seharian.'),
+    S('07:30–09:00','90 mnt','Kerja Wajib Penjara','Narapidana diwajibkan kerja — laundry, dapur, kebersihan','prison','⛓️',[], 'Kerja wajib 1–3 jam tergantung kebijakan penjara. Tyson pakai momen ini untuk tetap bergerak — angkat cucian berat, sapu cepat, apapun jadi latihan.'),
+    S('09:00–10:30','90 mnt','Kembali ke Sel — Sesi 2: Squat & Shadow Boxing','Langsung latihan setelah kerja wajib','cond','🥊',[
+      E('Squat Standar','Kaki selebar bahu, turun sempurna','8 × 20','istirahat 45 dtk'),
+      E('Jump Squat','Ledakkan ke atas','3 × 10','istirahat 60 dtk'),
+      E('Shadow Boxing — Jab saja','3 menit penuh, jab terus dari stance','3 × 3 mnt','istirahat 60 dtk'),
+      E('Shadow Boxing — Combo 1-2','Jab + Cross, rotasi pinggul','3 × 3 mnt','istirahat 60 dtk'),
+    ]),
+    S('10:30–11:00','30 mnt','Istirahat Sel','Berbaring sebentar — bukan tidur','rest','😮‍💨',[], 'Berbaring, atur napas, tapi tidak tidur. Tyson biasanya baca buku di waktu ini atau visualisasi gerakan boxing.'),
+    S('11:00–12:00','60 mnt','Sesi 3: Dip & Core','Tricep dan core tambahan','cond','💥',[
+      E('Tricep Dip','Pakai tepi tempat tidur sel','5 × 12','istirahat 60 dtk'),
+      E('Sit-up','Tambah 100 lagi','10 × 10','istirahat 45 dtk'),
+      E('Plank','Tahan posisi push-up','3 × 30 dtk','istirahat 45 dtk'),
+    ]),
+    S('12:00–12:30','30 mnt','Makan Siang','Makan siang penjara — apapun yang ada','eat','🍽️',[], 'Makan penuh. Jangan skip makan — kalori adalah bahan bakar. Tyson tidak pernah diet ekstrem, dia makan semua yang tersedia.'),
+    S('12:30–14:00','90 mnt','Sesi 4: Shadow Boxing Teknikal','Sesi panjang fokus teknik dan footwork','shadow','🥊',[
+      E('Stance & Footwork saja','Bergerak tanpa pukul — maju, mundur, lateral, pivot','3 × 3 mnt','istirahat 60 dtk'),
+      E('Shadow Boxing bebas','Semua pukulan yang sudah dipelajari','4 × 3 mnt','istirahat 60 dtk'),
+      E('Slip drill — kiri & kanan','Bayangkan jab datang, slip ke samping','3 × 2 mnt','istirahat 60 dtk'),
+    ]),
+    S('14:00–15:00','60 mnt','Yard Time Sore / Istirahat','Tergantung kebijakan penjara','rest','🌤️',[], 'Jika ada yard time sore — berjalan keliling lapangan, stretching, atau lari ringan. Jika tidak — tidur siang singkat 20 menit, lalu visualisasi boxing.'),
+    S('15:00–16:30','90 mnt','Sesi 5: Volume Finisher','Habiskan sisa tenaga','cond','🔥',[
+      E('Push-up','Tambah lagi — total hari ini menuju 100','5 × 10','istirahat 60 dtk'),
+      E('Squat','Total hari ini menuju 200','5 × 20','istirahat 45 dtk'),
+      E('Shadow Boxing bebas','Pace sendiri, santai tapi terus gerak','3 × 3 mnt','istirahat 90 dtk'),
+    ]),
+    S('16:30–17:30','60 mnt','Makan Malam + Kebersihan Sel','Makan malam, bersih-bersih, siap malam','eat','🍽️',[], 'Makan malam. Bersihkan sel. Ini waktu paling tenang di penjara.'),
+    S('17:30–20:00','150 mnt','Membaca & Visualisasi','Tyson membaca buku sejarah, filsafat, dan biografi petinju','rest','📖',[], 'Tyson membaca Machiavelli, Sun Tzu, Alexander the Great. Sambil baca, dia visualisasi gerakan boxing. Pikiran juga dilatih.'),
+    S('20:00–04:00','480 mnt','Tidur','Tidur 8 jam — pemulihan adalah latihan','sleep','😴',[], 'Tidur cukup WAJIB. Otot tumbuh saat tidur, bukan saat latihan. Tyson tidur tepat waktu karena tahu besok akan mulai lagi jam 4 pagi.'),
+  ],
+  // Selasa — lebih berat, lebih banyak sit-up
+  [
+    S('04:00–04:30','30 mnt','Bangun & Persiapan','','sleep','🌑',[],
+      'Bangun jam 4. Cuci muka air dingin. Peregangan leher dan bahu ringan sambil berdiri di sel.'),
+    S('04:30–05:30','60 mnt','Lari Pagi + Sprint','Hari Selasa Tyson tambah sprint','run','🏃',[
+      E('Lari aerobik','Keliling lapangan','20 mnt','pace stabil'),
+      E('Sprint 50 meter','Lari secepat mungkin lalu jalan kembali','10 ×','istirahat penuh antar sprint'),
+      E('Jalan + stretching','Cooldown','10 mnt',''),
+    ]),
+    S('05:30–07:00','90 mnt','Sesi 1: SIT-UP HARI BESAR','Selasa = hari core berat Tyson','cond','🔥',[
+      E('Sit-up Standar','Target naik dari hari Senin','15 × 10','istirahat 45 dtk'),
+      E('Bicycle Crunch','','5 × 20','istirahat 30 dtk'),
+      E('Leg Raise','','5 × 12','istirahat 45 dtk'),
+      E('Hollow Body Hold','Baring, angkat kaki dan bahu bersamaan','3 × 20 dtk','istirahat 45 dtk'),
+    ]),
+    S('07:00–07:30','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan semua porsi. Butuh kalori untuk sisa hari.'),
+    S('07:30–09:00','90 mnt','Kerja Wajib Penjara','','prison','⛓️',[],
+      'Kerja wajib. Jadikan setiap angkatan sebagai latihan. Pikul barang berat = deadlift. Sapu cepat = cardio.'),
+    S('09:00–11:00','120 mnt','Sesi 2: Push-up + Shadow Boxing','','cond','💪',[
+      E('Push-up Standar','','8 × 15','istirahat 60 dtk'),
+      E('Diamond Push-up','Tricep dan dada dalam','4 × 10','istirahat 60 dtk'),
+      E('Shadow Boxing — Combo 1-2-3','Jab–Cross–Left Hook','4 × 3 mnt','istirahat 60 dtk'),
+      E('Shadow Boxing — Uppercut intro','Combo 1-2-6: Jab–Cross–Right Upper','3 × 3 mnt','istirahat 60 dtk'),
+    ]),
+    S('11:00–11:30','30 mnt','Istirahat Aktif','','rest','😮‍💨',[],
+      'Berbaring. Visualisasi 10 menit: bayangkan setiap pukulan dengan detail sempurna. Otak melatih tubuh bahkan saat istirahat.'),
+    S('11:30–12:30','60 mnt','Sesi 3: Squat Berat','','cond','🦵',[
+      E('Squat Standar','','10 × 25','istirahat 45 dtk'),
+      E('Jump Squat','','5 × 15','istirahat 60 dtk'),
+      E('Wall Sit','Tahan posisi squat di tembok sel','4 × 40 dtk','istirahat 60 dtk'),
+      E('Lunge berjalan','Jalan melangkah lebar dalam sel','4 × 10 langkah','balik terus'),
+    ]),
+    S('12:00–12:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang. Istirahat total 30 menit — duduk, makan, tarik napas.'),
+    S('12:30–14:30','120 mnt','Sesi 4: Shadow Boxing Intensif','Ini sesi terpanjang shadow boxing hari ini','shadow','🥊',[
+      E('Footwork intensif','Bergerak terus tanpa pukul — footwork is king','3 × 3 mnt','istirahat 60 dtk'),
+      E('Combo 1-2-3-2','Jab–Cross–Hook–Cross — jaga guard','5 × 3 mnt','istirahat 60 dtk'),
+      E('Slip + Counter drill','Slip → langsung counter 2-3','3 × 3 mnt','istirahat 60 dtk'),
+      E('Body shot combo','Jab badan–Cross badan–Hook kepala','3 × 3 mnt','istirahat 60 dtk'),
+    ]),
+    S('14:30–16:00','90 mnt','Sesi 5: Finisher Total','Habiskan semua sisa energi','cond','💥',[
+      E('Sit-up tambahan','Tambah lagi ke total harian','10 × 15','istirahat 45 dtk'),
+      E('Push-up tambahan','','5 × 12','istirahat 60 dtk'),
+      E('Dip','','5 × 12','istirahat 60 dtk'),
+    ]),
+    S('16:00–17:00','60 mnt','Makan Malam + Bersih-bersih','','eat','🍽️',[],
+      'Makan malam penjara. Bersihkan sel. Siap malam.'),
+    S('17:00–20:00','180 mnt','Baca & Visualisasi','','rest','📖',[],
+      'Buku, visualisasi, refleksi. Tyson sangat mendalam dalam membaca di penjara — dia bilang ini mengubah cara berpikirnya sebagai fighter.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur 8 jam penuh. Wajib. Besok jam 4 pagi mulai lagi.'),
+  ],
+  // Rabu
+  [
+    S('04:00–04:30','30 mnt','Bangun','','sleep','🌑',[],
+      'Bangun jam 4 pagi. Air dingin. Peregangan.'),
+    S('04:30–05:20','50 mnt','Lari Pagi','','run','🏃',[
+      E('Lari aerobik','Pace sedang','25 mnt',''),
+      E('Stretching + pernapasan','Fokus recovery','15 mnt',''),
+      E('Jalan santai menuju sel','Cooldown','10 mnt',''),
+    ]),
+    S('05:20–07:00','100 mnt','Sesi 1: Upper Body Heavy','','cond','💪',[
+      E('Push-up Standar','','8 × 20','istirahat 60 dtk'),
+      E('Wide Push-up','','5 × 15','istirahat 45 dtk'),
+      E('Diamond Push-up','','4 × 12','istirahat 60 dtk'),
+      E('Dip','Tepi tempat tidur','6 × 15','istirahat 60 dtk'),
+      E('Decline Push-up','Kaki di atas tempat tidur','3 × 10','istirahat 60 dtk'),
+    ]),
+    S('07:00–07:30','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan pagi penjara.'),
+    S('07:30–09:00','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja wajib. Tyson dikenal rajin bekerja di penjara — ini juga bentuk latihan.'),
+    S('09:00–10:30','90 mnt','Sesi 2: Core + Squat','','cond','🔥',[
+      E('Sit-up','','12 × 15','istirahat 45 dtk'),
+      E('Bicycle Crunch','','5 × 25','istirahat 30 dtk'),
+      E('Leg Raise','','5 × 15','istirahat 45 dtk'),
+      E('Squat','','8 × 25','istirahat 45 dtk'),
+    ]),
+    S('10:30–11:00','30 mnt','Istirahat Sel','','rest','😮‍💨',[],
+      'Berbaring. Visualisasi teknik boxing 10 menit.'),
+    S('11:00–13:00','120 mnt','Sesi 3: Shadow Boxing Teknikal','Rabu = hari teknik, bukan volume','shadow','🥊',[
+      E('Footwork only','Maju mundur pivot angle','3 × 3 mnt','istirahat 60 dtk'),
+      E('Jab perfect form — lambat','1 jab setiap 2 detik, form sempurna','3 × 3 mnt','istirahat 60 dtk'),
+      E('Combo 1-2 perfect form','Lambat tapi sempurna','3 × 3 mnt','istirahat 60 dtk'),
+      E('Bob & Weave drill','Tekuk lutut, gerak melingkar','3 × 2 mnt','istirahat 60 dtk'),
+      E('Shadow Boxing bebas','Improvisasi','2 × 3 mnt','istirahat 90 dtk'),
+    ]),
+    S('13:00–13:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang.'),
+    S('13:30–15:30','120 mnt','Sesi 4: Conditioning Sore','','cond','💥',[
+      E('Sit-up tambahan','','10 × 15','istirahat 45 dtk'),
+      E('Push-up','','5 × 15','istirahat 60 dtk'),
+      E('Squat','','5 × 25','istirahat 45 dtk'),
+      E('Shadow Boxing ringan','Pace rendah, tapi terus gerak','3 × 3 mnt','istirahat 90 dtk'),
+    ]),
+    S('15:30–16:30','60 mnt','Yard Time / Istirahat Sore','','rest','🌤️',[],
+      'Yard time sore jika ada — jalan santai. Jika tidak — duduk di sel, baca, visualisasi.'),
+    S('16:30–17:00','30 mnt','Makan Malam','','eat','🍽️',[],
+      'Makan malam.'),
+    S('17:00–20:00','180 mnt','Membaca & Istirahat','','rest','📖',[],
+      'Baca. Tidur siang tidak — simpan untuk malam. Visualisasi fight 20 menit.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur 8 jam.'),
+  ],
+  // Kamis
+  [
+    S('04:00–04:30','30 mnt','Bangun','','sleep','🌑',[],
+      'Jam 4 pagi. Ritual harian.'),
+    S('04:30–05:30','60 mnt','Lari + Sprint Interval','Kamis lebih keras di cardio','run','🏃',[
+      E('Lari aerobik','','15 mnt','pace stabil'),
+      E('Sprint 30 detik + jalan 90 dtk','Interval training','8 ×',''),
+      E('Cooldown jalan','','10 mnt',''),
+    ]),
+    S('05:30–09:00','210 mnt','SESI BESAR KAMIS — Full Circuit','Kamis adalah hari paling keras di beginner','cond','🔥',[
+      E('Push-up','Satu set besar, istirahat sesukanya','5 × 20','istirahat 60 dtk'),
+      E('Sit-up','','10 × 20','istirahat 45 dtk'),
+      E('Squat','','8 × 25','istirahat 45 dtk'),
+      E('Dip','','5 × 12','istirahat 60 dtk'),
+      E('Shadow Boxing 1-2-3-2','','4 × 3 mnt','istirahat 60 dtk'),
+      E('Leg Raise','','4 × 15','istirahat 45 dtk'),
+      E('ISTIRAHAT 30 menit','Berbaring di sel','-','wajib'),
+      E('Push-up lagi','Sesi kedua','5 × 15','istirahat 60 dtk'),
+      E('Sit-up lagi','','8 × 15','istirahat 45 dtk'),
+      E('Shadow Boxing bebas','','3 × 3 mnt','istirahat 90 dtk'),
+    ]),
+    S('09:00–09:30','30 mnt','Makan Pagi (terlambat)','','eat','🍽️',[],
+      'Makan kalau waktunya makan pagi sudah lewat — minta dari sesama napi atau simpan dari tadi.'),
+    S('09:30–11:00','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja wajib penjara.'),
+    S('11:00–13:00','120 mnt','Sesi 2: Shadow Boxing Sore','','shadow','🥊',[
+      E('Footwork + Combo 1-2','','4 × 3 mnt','istirahat 60 dtk'),
+      E('Slip + Counter 2-3','','3 × 3 mnt','istirahat 60 dtk'),
+      E('Shadow bebas improvisasi','','3 × 3 mnt','istirahat 60 dtk'),
+    ]),
+    S('13:00–13:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang.'),
+    S('13:30–16:00','150 mnt','Sesi 3: Volume Finisher Kamis','Habiskan semua yang tersisa','cond','💥',[
+      E('Sit-up','Total harian menuju 300','8 × 15','istirahat 45 dtk'),
+      E('Push-up','Total harian menuju 150','4 × 15','istirahat 60 dtk'),
+      E('Squat','Total harian menuju 250','4 × 20','istirahat 45 dtk'),
+      E('Dip','','4 × 12','istirahat 60 dtk'),
+    ]),
+    S('16:00–17:00','60 mnt','Makan Malam + Bersih-bersih','','eat','🍽️',[],
+      'Makan malam. Istirahat.'),
+    S('17:00–20:00','180 mnt','Baca & Visualisasi','','rest','📖',[],
+      'Baca buku. Visualisasi fight.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur 8 jam. Besok Jumat — lebih ringan.'),
+  ],
+  // Jumat
+  [
+    S('04:00–04:30','30 mnt','Bangun','','sleep','🌑',[],
+      'Jam 4. Jumat sedikit lebih santai dari Kamis — tapi tetap latihan.'),
+    S('04:30–05:20','50 mnt','Lari Pagi Santai','Jumat = active recovery cardio','run','🏃',[
+      E('Lari aerobik pace santai','','30 mnt','tidak perlu sprint'),
+      E('Stretching panjang','Fokus semua otot yang nyeri','20 mnt','perlahan'),
+    ]),
+    S('05:20–07:00','100 mnt','Sesi 1: Shadow Boxing Teknik','Jumat fokus kualitas, bukan volume','shadow','🥊',[
+      E('Footwork saja — 10 menit','Bergerak terus tanpa lelah','10 mnt',''),
+      E('Jab perfect form','Rekam dirimu, perhatikan guard','3 × 3 mnt','istirahat 60 dtk'),
+      E('Combo 1-2 perfect form','','3 × 3 mnt','istirahat 60 dtk'),
+      E('Combo 1-2-3','','3 × 3 mnt','istirahat 60 dtk'),
+      E('Visualisasi sambil shadow boxing','Bayangkan lawan spesifik','2 × 3 mnt','istirahat 90 dtk'),
+    ]),
+    S('07:00–07:30','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan pagi.'),
+    S('07:30–09:00','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja wajib. Jumat kerja sedikit lebih santai biasanya.'),
+    S('09:00–11:00','120 mnt','Sesi 2: Core + Upper Body Ringan','Volume lebih rendah dari kemarin','cond','💪',[
+      E('Sit-up','','8 × 15','istirahat 45 dtk'),
+      E('Push-up','','6 × 15','istirahat 60 dtk'),
+      E('Dip','','4 × 12','istirahat 60 dtk'),
+      E('Plank','','4 × 40 dtk','istirahat 45 dtk'),
+    ]),
+    S('11:00–13:00','120 mnt','Sesi 3: Shadow Boxing Combo Panjang','','shadow','🥊',[
+      E('Combo 1-1-2-3','Double jab setup','3 × 3 mnt','istirahat 60 dtk'),
+      E('Combo 1-2-5-3','Jab–Cross–Uppercut–Hook','3 × 3 mnt','istirahat 60 dtk'),
+      E('Shadow bebas + footwork','Improvisasi penuh','3 × 3 mnt','istirahat 90 dtk'),
+    ]),
+    S('13:00–13:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang.'),
+    S('13:30–16:00','150 mnt','Sesi 4: Finisher Ringan + Stretching','Recovery sebelum Sabtu besar','cond','😮‍💨',[
+      E('Squat ringan','','5 × 20','istirahat 45 dtk'),
+      E('Sit-up','','5 × 15','istirahat 45 dtk'),
+      E('Stretching panjang — semua otot','Fokus pemulihan','20 mnt','perlahan'),
+    ]),
+    S('16:00–20:00','240 mnt','Makan Malam + Baca + Istirahat','Persiapan Sabtu besar','rest','📖',[],
+      'Makan malam lebih banyak dari biasanya — persiapan hari Sabtu yang paling berat. Tidur lebih awal jika bisa.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur 8 jam. Sabtu adalah hari terberat — simpan energi.'),
+  ],
+  // Sabtu
+  [
+    S('04:00–04:30','30 mnt','Bangun — Sabtu BESAR','Sabtu adalah hari paling keras dalam seminggu','sleep','🌑',[],
+      'Bangun jam 4. Sabtu tidak ada kompromi. Ini adalah hari volume maksimum.'),
+    S('04:30–05:30','60 mnt','Lari Pagi Panjang','Sabtu cardio lebih panjang','run','🏃',[
+      E('Lari aerobik panjang','','35 mnt','pace stabil'),
+      E('Sprint 10 × 30 detik','','10 ×','istirahat penuh'),
+      E('Cooldown jalan + stretching','','15 mnt',''),
+    ]),
+    S('05:30–08:30','180 mnt','SESI 1: VOLUME MONSTER — Push-up & Sit-up','Target total harian Sabtu: Push-up 200, Sit-up 500','cond','🔥',[
+      E('Push-up — Babak 1','','10 × 20','istirahat 60 dtk'),
+      E('Sit-up — Babak 1','','10 × 25','istirahat 45 dtk'),
+      E('ISTIRAHAT 15 menit','Wajib — atur napas','15 mnt','berbaring'),
+      E('Push-up — Babak 2','','5 × 20','istirahat 60 dtk'),
+      E('Sit-up — Babak 2','','5 × 25','istirahat 45 dtk'),
+      E('Wide Push-up','','5 × 15','istirahat 60 dtk'),
+      E('Bicycle Crunch','','5 × 25','istirahat 30 dtk'),
+      E('Leg Raise','','5 × 15','istirahat 45 dtk'),
+    ]),
+    S('08:30–09:00','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan pagi. Makan banyak — butuh kalori untuk lanjutkan hari.'),
+    S('09:00–11:00','120 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja wajib Sabtu — biasanya ada di penjara.'),
+    S('11:00–13:00','120 mnt','SESI 2: Squat & Dip Besar','','cond','💪',[
+      E('Squat','','10 × 30','istirahat 45 dtk'),
+      E('Jump Squat','','5 × 15','istirahat 60 dtk'),
+      E('Dip','','8 × 15','istirahat 60 dtk'),
+      E('Diamond Push-up','','5 × 15','istirahat 60 dtk'),
+    ]),
+    S('13:00–13:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang besar.'),
+    S('13:30–16:30','180 mnt','SESI 3: Shadow Boxing Sabtu — 12 Round','Fight simulation penuh','shadow','🥊',[
+      E('Round 1–2: Footwork & Jab','Ukur jarak, gerak terus','2 × 3 mnt','istirahat 60 dtk'),
+      E('Round 3–4: Combo 1-2-3','Pressure dan agresif','2 × 3 mnt','istirahat 60 dtk'),
+      E('Round 5–6: Slip + Counter','Defense dulu lalu counter','2 × 3 mnt','istirahat 60 dtk'),
+      E('Round 7–8: Body shot','Jab badan, cross badan, hook kepala','2 × 3 mnt','istirahat 60 dtk'),
+      E('Round 9–10: Speed','Kombinasi secepat mungkin','2 × 3 mnt','istirahat 60 dtk'),
+      E('Round 11–12: ALL OUT','Semua yang kamu punya','2 × 3 mnt','istirahat 60 dtk'),
+    ]),
+    S('16:30–17:30','60 mnt','Finisher + Sit-up Penutup','Tutup hari dengan sit-up','cond','💥',[
+      E('Sit-up penutup','Capai target 500 total hari ini','sisa target',''),
+      E('Push-up penutup','Capai target 200 total','sisa target',''),
+      E('Plank','','3 × 45 dtk',''),
+    ]),
+    S('17:30–20:00','150 mnt','Makan Malam + Istirahat Total','','eat','🍽️',[],
+      'Makan malam besar. Setelah ini — istirahat total. Tidak ada latihan lagi hari ini.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur 8–9 jam. Besok Minggu — satu-satunya hari istirahat dalam seminggu.'),
+  ],
+  // Minggu — REST
+  [
+    S('04:00–06:00','120 mnt','Tidur Lebih Lama','Minggu boleh tidur lebih panjang','sleep','😴',[],
+      'Tyson membolehkan dirinya tidur lebih lama di hari Minggu. Tubuh butuh ekstra recovery.'),
+    S('06:00–07:00','60 mnt','Bangun Santai + Stretching','','rest','🌅',[],
+      'Bangun santai. Stretching perlahan dari kepala sampai kaki. Tidak ada terburu-buru hari ini.'),
+    S('07:00–07:30','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan pagi santai.'),
+    S('07:30–12:00','270 mnt','Membaca & Menulis','Tyson membaca buku sejarah dan filsafat','rest','📖',[],
+      'Tyson membaca Machiavelli, Sun Tzu, Napoleon, Alexander the Great. Dia juga menulis catatan dan refleksi. Ini adalah latihan pikiran.'),
+    S('12:00–12:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang.'),
+    S('12:30–15:00','150 mnt','Visualisasi Mental','Latihan yang paling sering diabaikan','rest','🧠',[],
+      'Duduk diam. Tutup mata. Bayangkan setiap gerakan dengan detail: stance, jab, cross, hook, slip. Penelitian ilmiah membuktikan visualisasi mengaktifkan jalur saraf yang sama dengan latihan fisik.'),
+    S('15:00–17:00','120 mnt','Jalan Santai + Yard Time','','rest','🌤️',[],
+      'Jalan santai di lapangan. Bukan latihan — hanya bergerak ringan dan menghirup udara segar.'),
+    S('17:00–20:00','180 mnt','Makan Malam + Istirahat','','eat','🍽️',[],
+      'Makan malam. Persiapan mental untuk Senin. Tidur lebih awal malam ini.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur penuh. Besok Senin — siklus dimulai kembali.'),
+  ],
+];
+
+// ======================================================
+// INTERMEDIATE DATA
+// ======================================================
+const INT = [
+  // Senin
+  [
+    S('04:00','15 mnt','Bangun','','sleep','🌑',[],
+      'Jam 4 pagi. Rutinitas sudah terbentuk — tubuh bangun otomatis.'),
+    S('04:15–05:15','60 mnt','Lari + Sprint','','run','🏃',[
+      E('Lari aerobik','','25 mnt','pace sedang'),
+      E('Sprint 50m × 12 kali','','12 ×','istirahat penuh'),
+      E('Cooldown','','10 mnt',''),
+    ]),
+    S('05:15–08:00','165 mnt','SESI 1: Push-up 350 + Shadow Boxing 6 Round','Volume naik signifikan dari beginner','cond','💪',[
+      E('Standard Push-up','','10 × 25','istirahat 60 dtk'),
+      E('Wide Push-up','','6 × 20','istirahat 45 dtk'),
+      E('Diamond Push-up','','6 × 15','istirahat 60 dtk'),
+      E('Explosive Push-up','Angkat tangan dari lantai','4 × 12','istirahat 60 dtk'),
+      E('Decline Push-up','','4 × 12','istirahat 60 dtk'),
+      E('Shadow Boxing 6 Round','Combo 1-2-3-2 berganti tiap round','6 × 3 mnt','istirahat 60 dtk'),
+    ]),
+    S('08:00–08:30','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan pagi penjara. Makan semua.'),
+    S('08:30–10:00','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja wajib penjara.'),
+    S('10:00–12:30','150 mnt','SESI 2: Sit-up 600 + Squat','','cond','🔥',[
+      E('Sit-up','10 set × 60 reps','600 total','istirahat 60 dtk'),
+      E('Bicycle Crunch','','8 × 30','istirahat 30 dtk'),
+      E('Leg Raise','','8 × 20','istirahat 45 dtk'),
+      E('Hollow Body','','5 × 30 dtk','istirahat 45 dtk'),
+      E('Squat','','10 × 35','istirahat 45 dtk'),
+      E('Jump Squat','','6 × 20','istirahat 60 dtk'),
+    ]),
+    S('12:30–13:00','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang.'),
+    S('13:00–15:30','150 mnt','SESI 3: Shadow Boxing 8 Round + Dip','','shadow','🥊',[
+      E('Round 1–2: Footwork intensive','','2 × 3 mnt','istirahat 60 dtk'),
+      E('Round 3–4: Slip + Counter','','2 × 3 mnt','istirahat 60 dtk'),
+      E('Round 5–6: Bob & Weave + Upper','','2 × 3 mnt','istirahat 60 dtk'),
+      E('Round 7–8: ALL speed','','2 × 3 mnt','istirahat 60 dtk'),
+      E('Dip','','8 × 25','istirahat 60 dtk'),
+    ]),
+    S('15:30–17:00','90 mnt','SESI 4: Volume Finisher','','cond','💥',[
+      E('Push-up tambahan','Total harian 350+','3 × 25','istirahat 60 dtk'),
+      E('Sit-up tambahan','Total harian 600+','4 × 25','istirahat 45 dtk'),
+    ]),
+    S('17:00–20:00','180 mnt','Makan Malam + Baca','','eat','📖',[],
+      'Makan malam. Baca buku. Visualisasi.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur 8 jam.'),
+  ],
+  // Selasa - Sabtu (disingkat untuk efisiensi, pola sama tapi volume naik)
+  [
+    S('04:00–04:15','15 mnt','Bangun','','sleep','🌑',[],
+      'Jam 4 pagi.'),
+    S('04:15–05:15','60 mnt','Lari + Fartlek','','run','🏃',[
+      E('Lari 5 km fartlek','Sprint 100m setiap 500m','30 mnt',''),
+      E('Cooldown + stretching','','20 mnt',''),
+    ]),
+    S('05:15–09:00','225 mnt','SESI 1: CORE BESAR — Sit-up 800','Selasa = hari core maksimum','cond','🔥',[
+      E('Sit-up','16 set × 50 reps','800 total','istirahat 60 dtk'),
+      E('Bicycle Crunch','','10 × 35','istirahat 30 dtk'),
+      E('Leg Raise','','8 × 25','istirahat 45 dtk'),
+      E('Hollow Body Hold','','6 × 40 dtk','istirahat 45 dtk'),
+      E('Plank','','5 × 90 dtk','istirahat 45 dtk'),
+    ]),
+    S('09:00–09:30','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan.'),
+    S('09:30–11:00','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja wajib.'),
+    S('11:00–13:30','150 mnt','SESI 2: Squat 600 + Push-up','','cond','💪',[
+      E('Squat','10 × 50','600 squat',  'istirahat 45 dtk'),
+      E('Jump Squat','','8 × 20','istirahat 60 dtk'),
+      E('Wall Sit','','6 × 60 dtk','istirahat 60 dtk'),
+      E('Push-up','','10 × 30','istirahat 60 dtk'),
+    ]),
+    S('13:30–14:00','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang.'),
+    S('14:00–16:30','150 mnt','SESI 3: Shadow Boxing 10 Round','Lebih panjang dan lebih intens','shadow','🥊',[
+      E('10 Round shadow boxing','Setiap round fokus berbeda','10 × 3 mnt','istirahat 60 dtk'),
+      E('Round 1: footwork, 2: jab, 3: 1-2, 4: 1-2-3, 5: body, 6: slip+counter, 7: bob+upper, 8: pressure, 9: speed, 10: all out','','',''),
+    ]),
+    S('16:30–18:00','90 mnt','SESI 4: Finisher + Dip','','cond','💥',[
+      E('Dip','','10 × 25','istirahat 60 dtk'),
+      E('Sit-up finisher','','5 × 30','istirahat 45 dtk'),
+    ]),
+    S('18:00–20:00','120 mnt','Makan Malam + Istirahat','','eat','📖',[],
+      'Makan, istirahat, visualisasi.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur.'),
+  ],
+  [S('04:00–04:15','15 mnt','Bangun','','sleep','🌑',[],
+      'Jam 4.'),
+    S('04:15–05:15','60 mnt','Lari Santai + Stretching Panjang','Rabu = recovery cardio','run','🏃',[
+      E('Lari aerobik pace santai','','30 mnt',''),
+      E('Stretching panjang semua otot','','25 mnt',''),
+    ]),
+    S('05:15–09:00','225 mnt','SESI TEKNIK: Shadow Boxing 12 Round','Rabu murni teknik dan shadow boxing','shadow','🥊',[
+      E('Footwork only','10 menit bergerak tanpa pukul','10 mnt',''),
+      E('Jab perfect — 500 jab','1 per detik, form sempurna','500 jab',''),
+      E('Cross perfect — 300 cross','','300 cross',''),
+      E('Combo 1-2 — 300 combo','','300 kali',''),
+      E('Hook drill kiri-kanan','','300 hook',''),
+      E('Shadow Boxing 6 Round','Bebas dan natural','6 × 3 mnt','istirahat 60 dtk'),
+      E('Slip + Counter 3 Round','','3 × 3 mnt','istirahat 60 dtk'),
+    ]),
+    S('09:00–09:30','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan.'),
+    S('09:30–11:00','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja.'),
+    S('11:00–14:00','180 mnt','SESI 2: Push-up + Dip + Core','','cond','💪',[
+      E('Push-up total','','12 × 25','istirahat 60 dtk'),
+      E('Dip total','','10 × 25','istirahat 60 dtk'),
+      E('Sit-up','','10 × 40','istirahat 45 dtk'),
+      E('Bicycle Crunch','','8 × 30','istirahat 30 dtk'),
+    ]),
+    S('14:00–14:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan.'),
+    S('14:30–17:00','150 mnt','SESI 3: Squat + Shadow Boxing Sore','','cond','🥊',[
+      E('Squat','','10 × 40','istirahat 45 dtk'),
+      E('Shadow Boxing 6 Round','Fokus kecepatan','6 × 3 mnt','istirahat 60 dtk'),
+    ]),
+    S('17:00–20:00','180 mnt','Makan Malam + Baca','','eat','📖',[],
+      'Makan, baca, visualisasi, tidur lebih awal.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur.'),
+  ],
+  // Kamis
+  [
+    S('04:00–04:15','15 mnt','Bangun','','sleep','🌑',[],
+      'Jam 4.'),
+    S('04:15–05:15','60 mnt','Lari + Sprint Keras','','run','🏃',[
+      E('Lari 6 km','','35 mnt',''),
+      E('Sprint 15 × 30 dtk','','15 ×','istirahat 90 dtk'),
+    ]),
+    S('05:15–12:00','405 mnt','SESI MARATHON KAMIS','Kamis adalah hari terpanjang intermediate','cond','🔥',[
+      E('Push-up','','12 × 30','istirahat 60 dtk'),
+      E('Sit-up','','12 × 50','istirahat 45 dtk'),
+      E('Squat','','10 × 40','istirahat 45 dtk'),
+      E('Dip','','10 × 25','istirahat 60 dtk'),
+      E('ISTIRAHAT 30 menit','-','30 mnt','wajib di tengah'),
+      E('Shadow Boxing','Combo berganti tiap round','8 × 3 mnt','istirahat 60 dtk'),
+      E('Leg Raise','','8 × 25','istirahat 45 dtk'),
+      E('Bicycle Crunch','','8 × 35','istirahat 30 dtk'),
+      E('Push-up tambahan','Sesi kedua','6 × 25','istirahat 60 dtk'),
+      E('Sit-up tambahan','','6 × 40','istirahat 45 dtk'),
+    ]),
+    S('12:00–12:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang.'),
+    S('12:30–14:00','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja.'),
+    S('14:00–16:30','150 mnt','SESI 2: Shadow Boxing 10 Round Sore','','shadow','🥊',[
+      E('10 Round shadow boxing','Skenario berbeda tiap round','10 × 3 mnt','istirahat 60 dtk'),
+    ]),
+    S('16:30–18:00','90 mnt','Finisher','','cond','💥',[
+      E('Sit-up finisher','','6 × 40',''),
+      E('Push-up finisher','','4 × 25',''),
+    ]),
+    S('18:00–20:00','120 mnt','Makan Malam + Istirahat','','eat','📖',[],
+      'Istirahat.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur.'),
+  ],
+  // Jumat
+  [
+    S('04:00–04:15','15 mnt','Bangun','','sleep','🌑',[],
+      'Jam 4.'),
+    S('04:15–05:15','60 mnt','Lari Santai','Jumat = prep Sabtu besar','run','🏃',[
+      E('Lari aerobik santai','','35 mnt',''),
+      E('Stretching + pernapasan','','20 mnt',''),
+    ]),
+    S('05:15–09:00','225 mnt','SESI 1: Teknik + Volume Sedang','','shadow','🥊',[
+      E('Footwork 10 menit','','10 mnt',''),
+      E('Shadow Boxing bebas','Natural, improvisasi','8 × 3 mnt','istirahat 60 dtk'),
+      E('Slip + Counter','','4 × 3 mnt','istirahat 60 dtk'),
+      E('Bob & Weave + Uppercut','','4 × 3 mnt','istirahat 60 dtk'),
+      E('Push-up','Volume sedang','8 × 25','istirahat 60 dtk'),
+      E('Sit-up','','8 × 40','istirahat 45 dtk'),
+    ]),
+    S('09:00–09:30','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan.'),
+    S('09:30–11:00','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja.'),
+    S('11:00–14:00','180 mnt','SESI 2: Core + Squat','','cond','💪',[
+      E('Sit-up','','10 × 40','istirahat 45 dtk'),
+      E('Squat','','10 × 40','istirahat 45 dtk'),
+      E('Dip','','8 × 25','istirahat 60 dtk'),
+    ]),
+    S('14:00–14:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan.'),
+    S('14:30–17:00','150 mnt','SESI 3: Shadow Boxing Ringan + Stretching','Persiapan Sabtu','shadow','🥊',[
+      E('Shadow Boxing 6 Round','Pace rendah, teknik baik','6 × 3 mnt','istirahat 60 dtk'),
+      E('Stretching panjang','Semua otot','30 mnt',''),
+      E('Makan ekstra kalori','Persiapan Sabtu','-',''),
+    ]),
+    S('17:00–20:00','180 mnt','Makan Malam + Istirahat','','eat','📖',[],
+      'Makan banyak. Tidur lebih awal.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur. Sabtu adalah hari paling keras.'),
+  ],
+  // Sabtu BESAR
+  [
+    S('04:00–04:15','15 mnt','Bangun — SABTU MAXIMUM','','sleep','🌑',[],
+      'Sabtu tidak ada kompromi.'),
+    S('04:15–05:30','75 mnt','Lari Panjang','','run','🏃',[
+      E('Lari 8 km','','45 mnt',''),
+      E('Sprint 15 × 30 dtk','','15 ×','istirahat penuh'),
+      E('Cooldown','','15 mnt',''),
+    ]),
+    S('05:30–09:30','240 mnt','BABAK 1: Push-up 500 + Sit-up 1000','Target ambisius Sabtu intermediate','cond','🔥',[
+      E('Push-up','10 set × 50','500 total','istirahat 90 dtk'),
+      E('Sit-up','20 set × 50','1000 total','istirahat 60 dtk'),
+    ]),
+    S('09:30–10:00','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan pagi. Lanjutkan.'),
+    S('10:00–11:30','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja wajib.'),
+    S('11:30–14:00','150 mnt','BABAK 2: Squat 600 + Dip 400','','cond','💪',[
+      E('Squat','','12 × 50','istirahat 45 dtk'),
+      E('Dip','','8 × 50','istirahat 60 dtk'),
+    ]),
+    S('14:00–14:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang.'),
+    S('14:30–18:00','210 mnt','BABAK 3: Shadow Boxing 12 Round + Finisher','','shadow','🥊',[
+      E('12 Round shadow boxing','Skenario fight penuh','12 × 3 mnt','istirahat 60 dtk'),
+      E('Sit-up sisa target','Habiskan kalau belum 1000','sisa',''),
+      E('Push-up sisa target','Habiskan kalau belum 500','sisa',''),
+    ]),
+    S('18:00–20:00','120 mnt','Makan Malam + Istirahat Total','','eat','📖',[],
+      'Makan banyak. Tidak ada latihan lagi.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur 8+ jam. Besok Minggu.'),
+  ],
+  // Minggu
+  [
+    S('04:00–07:00','180 mnt','Tidur Lebih','','sleep','😴',[],
+      'Boleh tidur sampai jam 7. Recovery total.'),
+    S('07:00–20:00','780 mnt','REST TOTAL — Baca, Visualisasi, Jalan Santai','Satu-satunya hari penuh istirahat','rest','📖',[],
+      'Tidak ada latihan keras. Baca buku. Visualisasi 30 menit. Jalan santai di yard. Makan 3x normal. Tidur lebih awal malam ini untuk persiapan Senin.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur. Minggu depan — siklus berlanjut dengan volume lebih tinggi.'),
+  ],
+];
+
+// ======================================================
+// ADVANCED — pola sama, isi berbeda
+// ======================================================
+function makeAdvDay(day) {
+  const targets = [
+    {pu:700,su:1200,sq:600,dip:400,sb:10},
+    {pu:600,su:1400,sq:700,dip:450,sb:12},
+    {pu:500,su:1000,sq:500,dip:400,sb:12},
+    {pu:800,su:1200,sq:700,dip:500,sb:10},
+    {pu:600,su:1000,sq:600,dip:400,sb:10},
+    {pu:800,su:1500,sq:800,dip:500,sb:15},
+    {pu:0,su:0,sq:0,dip:0,sb:0},
+  ];
+  const t = targets[day];
+  if(day===6) return [
+    S('04:00–08:00','240 mnt','Tidur Lebih + Bangun Santai','','sleep','😴',[],
+      'Minggu. Tidur extra. Istirahat total.'),
+    S('08:00–20:00','720 mnt','REST TOTAL','','rest','📖',[],
+      'Tidak ada latihan. Baca, visualisasi, jalan santai. Besok Senin mulai lagi lebih keras.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur.'),
+  ];
+  return [
+    S('04:00','15 mnt','Bangun','','sleep','🌑',[],
+      'Jam 4 pagi. Advanced — tidak ada nego.'),
+    S('04:15–05:30','75 mnt','Lari 8–10 km','','run','🏃',[
+      E('Lari aerobik','','40 mnt',''),
+      E('Sprint interval','20 × 30 dtk','20 ×','istirahat 60 dtk'),
+      E('Cooldown','','10 mnt',''),
+    ]),
+    S('05:30–09:30','240 mnt',`SESI 1 — Push-up ${t.pu} + Sit-up ${t.su}`,`Target harian advanced`,'cond','🔥',[
+      E('Push-up','Bagi dalam set 50',''+t.pu+' total','istirahat 90 dtk'),
+      E('Sit-up','Bagi dalam set 100',''+t.su+' total','istirahat 60 dtk'),
+      E('Bicycle Crunch','','10 × 40','istirahat 30 dtk'),
+      E('Leg Raise','','10 × 25','istirahat 45 dtk'),
+      E('Plank','','5 × 2 mnt','istirahat 60 dtk'),
+    ]),
+    S('09:30–10:00','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan.'),
+    S('10:00–11:30','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja wajib.'),
+    S('11:30–14:00','150 mnt',`SESI 2 — Squat ${t.sq} + Dip ${t.dip}`,'','cond','💪',[
+      E('Squat','',''+t.sq+' total','istirahat 45 dtk'),
+      E('Jump Squat','','8 × 25','istirahat 60 dtk'),
+      E('Dip','',''+t.dip+' total','istirahat 60 dtk'),
+    ]),
+    S('14:00–14:30','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan.'),
+    S('14:30–18:00','210 mnt',`SESI 3 — Shadow Boxing ${t.sb} Round + Finisher`,`Fight simulation lengkap`,'shadow','🥊',[
+      E('Shadow Boxing',`${t.sb} round penuh dengan skenario berbeda`,''+t.sb+' × 3 mnt','istirahat 60 dtk'),
+      E('Finisher push-up','','sisa target',''),
+      E('Finisher sit-up','','sisa target',''),
+    ]),
+    S('18:00–20:00','120 mnt','Makan Malam + Istirahat','','eat','📖',[],
+      'Makan. Baca. Visualisasi.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur 8 jam.'),
+  ];
+}
+const ADV = DAYS.map((_,i) => makeAdvDay(i));
+
+// ======================================================
+// PRO — TYSON ORIGINAL
+// ======================================================
+function makeProDay(day) {
+  if(day===6) return [
+    S('04:00–08:00','240 mnt','Tidur Extra','','sleep','😴',[],
+      'Satu-satunya hari Tyson boleh tidur lebih lama.'),
+    S('08:00–20:00','720 mnt','REST TOTAL — Tyson Minggu','','rest','📖',[],
+      'Tidak ada latihan. Tyson membaca sepanjang hari Minggu. Buku sejarah, filsafat, biografi. Visualisasi 30 menit. Makan normal 3x.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur. Besok Senin — protokol asli dimulai.'),
+  ];
+  return [
+    S('04:00','10 mnt','Bangun','','sleep','🌑',[],
+      'Jam 4 pagi. Tidak pernah terlambat.'),
+    S('04:10–05:10','60 mnt','Lari 5 km','Tyson berlari setiap pagi tanpa kecuali','run','🏃',[
+      E('Lari 5 km','Keliling lapangan penjara','5 km','pace stabil'),
+      E('Cooldown jalan','','10 mnt',''),
+    ]),
+    S('05:10–07:10','120 mnt','PROTOKOL TYSON — Push-up 500','500 SETIAP HARI','cond','💪',[
+      E('Push-up','10 set × 50 reps','500 total','istirahat 90 dtk/set'),
+    ]),
+    S('07:10–09:10','120 mnt','PROTOKOL TYSON — Sit-up 2000 Babak 1','Target 2000 sit-up per hari','cond','🔥',[
+      E('Sit-up','10 set × 100 reps','1000 total','istirahat 60 dtk/set'),
+    ]),
+    S('09:10–09:40','30 mnt','Makan Pagi','','eat','🍽️',[],
+      'Makan pagi. Wajib — butuh kalori untuk lanjutkan.'),
+    S('09:40–11:10','90 mnt','Kerja Wajib','','prison','⛓️',[],
+      'Kerja wajib penjara.'),
+    S('11:10–13:10','120 mnt','PROTOKOL TYSON — Sit-up 2000 Babak 2','','cond','🔥',[
+      E('Sit-up','10 set × 100 reps','1000 total','istirahat 60 dtk/set'),
+    ]),
+    S('13:10–13:40','30 mnt','Makan Siang','','eat','🍽️',[],
+      'Makan siang.'),
+    S('13:40–15:40','120 mnt','PROTOKOL TYSON — Dip 500','','cond','💪',[
+      E('Dip','10 set × 50 reps','500 total','istirahat 90 dtk/set'),
+    ]),
+    S('15:40–17:40','120 mnt','PROTOKOL TYSON — Squat 500','','cond','🦵',[
+      E('Squat','10 set × 50 reps','500 total','istirahat 60 dtk/set'),
+    ]),
+    S('17:40–19:40','120 mnt','PROTOKOL TYSON — Shadow Boxing 10 Round','','shadow','🥊',[
+      E('Round 1: Footwork & Jab','','3 mnt','istirahat 60 dtk'),
+      E('Round 2: Cross + Jab','','3 mnt','istirahat 60 dtk'),
+      E('Round 3: Hook intro','','3 mnt','istirahat 60 dtk'),
+      E('Round 4: Combo 1-2-3','','3 mnt','istirahat 60 dtk'),
+      E('Round 5: Body shots','','3 mnt','istirahat 60 dtk'),
+      E('Round 6: Slip + Counter','','3 mnt','istirahat 60 dtk'),
+      E('Round 7: Bob & Weave + Upper','','3 mnt','istirahat 60 dtk'),
+      E('Round 8: Pressure fighting','','3 mnt','istirahat 60 dtk'),
+      E('Round 9: Speed','','3 mnt','istirahat 60 dtk'),
+      E('Round 10: ALL OUT','','3 mnt','habiskan semua'),
+    ]),
+    S('19:40–20:00','20 mnt','Makan Malam','','eat','🍽️',[],
+      'Makan malam. Tidur segera.'),
+    S('20:00–04:00','480 mnt','Tidur','','sleep','😴',[],
+      'Tidur 8 jam. Besok ulangi. Sama persis. Setiap hari.'),
+  ];
+}
+const PRO = DAYS.map((_,i) => makeProDay(i));
+
+// ======================================================
+// RENDER
+// ======================================================
+const TYPE_COLOR = {
+  sleep:'rgba(26,58,90,.6)',run:'rgba(30,80,24,.6)',
+  shadow:'rgba(160,120,10,.6)',cond:'rgba(110,28,20,.6)',
+  rest:'rgba(40,36,32,.6)',eat:'rgba(30,60,20,.6)',prison:'rgba(60,48,34,.6)'
+};
+
+function renderSessions(sessions, levelKey, dayIdx) {
+  return sessions.map((s,si) => {
+    const hasExercises = s.exercises && s.exercises.length > 0;
+    const hasRest = s.restText;
+    const canOpen = hasExercises || hasRest;
+    const id = `s-${levelKey}-${dayIdx}-${si}`;
+    const ckKey = `ck-session-${id}`;
+    const isDone = localStorage.getItem(ckKey) === '1';
+
+    let exRows = '';
+    if(hasExercises) {
+      exRows = `<table class="etable">` +
+        s.exercises.map((e,ei) => {
+          const exKey = `ck-ex-${id}-${ei}`;
+          const exDone = localStorage.getItem(exKey) === '1';
+          return `
+          <tr class="${exDone?'ex-done':''}" id="exrow-${id}-${ei}">
+            <td class="erow-check">
+              <div class="echeck ${exDone?'checked':''}" onclick="toggleEx('${id}','${exKey}',${ei},'${levelKey}',${dayIdx},${si})">&#10003;</div>
+            </td>
+            <td class="erow-num">${ei+1}</td>
+            <td class="ename">${e.name}${e.sm?`<small>${e.sm}</small>`:''}</td>
+            <td class="ereps">${e.reps}</td>
+            <td class="enote">${e.note||''}</td>
+          </tr>`;
+        }).join('') +
+        `</table>`;
+    }
+    if(hasRest) {
+      exRows += `<div class="rest-row">${s.restText}</div>`;
+    }
+
+    return `
+      <div class="sblock type-${s.type} ${canOpen?'':'no-toggle'} ${isDone?'done':''}" id="${id}">
+        <div class="shead" ${canOpen?`onclick="toggleBlock('${id}')"`:''}>
+          <div>
+            <div class="stime">${s.time}</div>
+            <div class="sdur">${s.dur}</div>
+          </div>
+          <div class="stitle-wrap">
+            <div class="stitle">${s.title}</div>
+            ${s.note?`<div class="stitle-note">${s.note}</div>`:''}
+          </div>
+          <div class="smeta">
+            <div class="stype-icon">${s.icon}</div>
+            <button class="check-btn" title="Tandai selesai"
+              onclick="event.stopPropagation(); toggleSession('${id}','${ckKey}','${levelKey}',${dayIdx})">&#10003;</button>
+            ${canOpen?`<div class="sarrow">&#9662;</div>`:''}
+          </div>
+        </div>
+        ${canOpen?`<div class="sbody">${exRows}</div>`:''}
+      </div>`;
+  }).join('');
+}
+
+function buildLevel(key, data, tabsEl, daysEl) {
+  tabsEl.innerHTML = DAYS.map((d,i) =>
+    `<button class="wbtn ${i===0?'active':''}" onclick="switchDay('${key}',${i})">${d}<span class="done-dot"></span><span class="wday-label">${DAYS_EN[i]}</span></button>`
+  ).join('');
+
+  daysEl.innerHTML = DAYS.map((d,i) => {
+    const dayData = data[i];
+    const totalSessions = dayData.length;
+    return `
+      <div class="wday-panel ${i===0?'active':''}" id="wday-${key}-${i}">
+        <div class="day-summary-bar">
+          <div class="dsb-title">${DAYS[i].toUpperCase()} — ${DAYS_EN[i]}</div>
+        </div>
+        <div class="day-progress" id="dp-${key}-${i}">
+          <div class="dp-top">
+            <div class="dp-label">Progress Hari Ini</div>
+            <div class="dp-pct" id="dp-pct-${key}-${i}">0%</div>
+          </div>
+          <div class="dp-bar-bg"><div class="dp-bar-fill" id="dp-fill-${key}-${i}"></div></div>
+          <button class="reset-day-btn" onclick="resetDay('${key}',${i},${totalSessions})">Reset Hari Ini</button>
+        </div>
+        <div class="sessions">${renderSessions(dayData, key, i)}</div>
+      </div>`;
+  }).join('');
+
+  // init progress bars
+  DAYS.forEach((_,i) => updateProgress(key, i, data[i].length));
+}
+
+buildLevel('beg', BEG, document.getElementById('wtabs-beg'), document.getElementById('wdays-beg'));
+buildLevel('int', INT, document.getElementById('wtabs-int'), document.getElementById('wdays-int'));
+buildLevel('adv', ADV, document.getElementById('wtabs-adv'), document.getElementById('wdays-adv'));
+buildLevel('pro', PRO, document.getElementById('wtabs-pro'), document.getElementById('wdays-pro'));
+
+// ======================================================
+// INTERACTIONS
+// ======================================================
+function toggleBlock(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function switchDay(level, dayIdx) {
+  document.querySelectorAll(`#wtabs-${level} .wbtn`).forEach((b,i) => {
+    b.classList.toggle('active', i===dayIdx);
+  });
+  document.querySelectorAll(`#wdays-${level} .wday-panel`).forEach((p,i) => {
+    p.classList.toggle('active', i===dayIdx);
+  });
+}
+
+document.querySelectorAll('.lbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.lbtn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.lpanel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('lp-' + btn.dataset.level).classList.add('active');
+  });
+});
+
+// ======================================================
+// PWA — Service Worker Registration
+// ======================================================
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => {
+        console.log('[PWA] Service Worker registered:', reg.scope);
+
+        // Cek apakah ada update
+        reg.addEventListener('updatefound', () => {
+          const newWorker = reg.installing;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              // Ada versi baru — tampilkan toast
+              document.getElementById('sw-toast').classList.add('show');
+            }
+          });
+        });
+      })
+      .catch(err => console.error('[PWA] SW registration failed:', err));
+
+    // Reload saat SW baru aktif
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      window.location.reload();
+    });
+  });
+}
+
+// ======================================================
+// PWA — Install Prompt (Add to Home Screen)
+// ======================================================
+let deferredPrompt = null;
+const banner = document.getElementById('pwa-banner');
+const installBtn = document.getElementById('pwa-install-btn');
+const dismissBtn = document.getElementById('pwa-dismiss-btn');
+const swToast = document.getElementById('sw-toast');
+const swUpdateBtn = document.getElementById('sw-update-btn');
+
+// Tangkap event beforeinstallprompt
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+
+  // Jangan tampilkan kalau user sudah dismiss sebelumnya
+  if (localStorage.getItem('pwa-dismissed') !== '1') {
+    setTimeout(() => banner.classList.add('show'), 2000);
+  }
+});
+
+// Tombol install
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  banner.classList.remove('show');
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  console.log('[PWA] User choice:', outcome);
+  deferredPrompt = null;
+  if (outcome === 'accepted') {
+    localStorage.setItem('pwa-dismissed', '1');
+  }
+});
+
+// Tombol dismiss
+dismissBtn.addEventListener('click', () => {
+  banner.classList.remove('show');
+  localStorage.setItem('pwa-dismissed', '1');
+});
+
+// Sudah diinstall — sembunyikan banner
+window.addEventListener('appinstalled', () => {
+  banner.classList.remove('show');
+  deferredPrompt = null;
+  localStorage.setItem('pwa-dismissed', '1');
+  console.log('[PWA] App installed!');
+});
+
+// Tombol update SW
+swUpdateBtn.addEventListener('click', () => {
+  navigator.serviceWorker.getRegistration().then(reg => {
+    if (reg && reg.waiting) {
+      reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+    }
+  });
+  swToast.classList.remove('show');
+});
+
+// Count done sessions for a given level+day
+function countDone(levelKey, dayIdx, total) {
+  let done = 0;
+  for(let si = 0; si < total; si++) {
+    const id = `s-${levelKey}-${dayIdx}-${si}`;
+    if(localStorage.getItem(`ck-session-${id}`) === '1') done++;
+  }
+  return done;
+}
+
+function updateProgress(levelKey, dayIdx, total) {
+  const done = countDone(levelKey, dayIdx, total);
+  const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+  const pctEl = document.getElementById(`dp-pct-${levelKey}-${dayIdx}`);
+  const fillEl = document.getElementById(`dp-fill-${levelKey}-${dayIdx}`);
+  const tabBtn = document.querySelectorAll(`#wtabs-${levelKey} .wbtn`)[dayIdx];
+
+  if(pctEl) {
+    pctEl.textContent = pct + '%';
+    pctEl.className = 'dp-pct' + (pct === 100 ? ' full' : '');
+  }
+  if(fillEl) {
+    fillEl.style.width = pct + '%';
+    fillEl.className = 'dp-bar-fill' + (pct === 100 ? ' full' : '');
+  }
+  if(tabBtn) {
+    tabBtn.classList.toggle('all-done', pct === 100);
+  }
+}
+
+function toggleSession(id, ckKey, levelKey, dayIdx) {
+  const block = document.getElementById(id);
+  const isDone = localStorage.getItem(ckKey) === '1';
+  if(isDone) {
+    localStorage.removeItem(ckKey);
+    block.classList.remove('done');
+  } else {
+    localStorage.setItem(ckKey, '1');
+    block.classList.add('done');
+  }
+  // figure out total sessions for this day
+  const panels = ['beg','int','adv','pro'];
+  const dataMap = {beg: BEG, int: INT, adv: ADV, pro: PRO};
+  const total = dataMap[levelKey][dayIdx].length;
+  updateProgress(levelKey, dayIdx, total);
+}
+
+function toggleEx(sessionId, exKey, exIdx, levelKey, dayIdx, sessionIdx) {
+  const row = document.getElementById(`exrow-${sessionId}-${exIdx}`);
+  const box = row.querySelector('.echeck');
+  const isDone = localStorage.getItem(exKey) === '1';
+  if(isDone) {
+    localStorage.removeItem(exKey);
+    row.classList.remove('ex-done');
+    box.classList.remove('checked');
+  } else {
+    localStorage.setItem(exKey, '1');
+    row.classList.add('ex-done');
+    box.classList.add('checked');
+  }
+}
+
+function resetDay(levelKey, dayIdx, total) {
+  if(!confirm('Reset semua centang untuk hari ini?')) return;
+  for(let si = 0; si < total; si++) {
+    const id = `s-${levelKey}-${dayIdx}-${si}`;
+    localStorage.removeItem(`ck-session-${id}`);
+    const block = document.getElementById(id);
+    if(block) block.classList.remove('done');
+    // also clear exercise checks for this session
+    for(let ei = 0; ei < 30; ei++) {
+      const exKey = `ck-ex-${id}-${ei}`;
+      if(localStorage.getItem(exKey)) {
+        localStorage.removeItem(exKey);
+        const row = document.getElementById(`exrow-${id}-${ei}`);
+        if(row) {
+          row.classList.remove('ex-done');
+          const box = row.querySelector('.echeck');
+          if(box) box.classList.remove('checked');
+        }
+      }
+    }
+  }
+  updateProgress(levelKey, dayIdx, total);
+}
+</script>
+</body>
+</html>
