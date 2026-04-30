@@ -5,20 +5,21 @@
 // ============================================================
 
 const CACHE_NAME = 'tyson-prison-v1';
-const OFFLINE_URL = './index.html';
+const OFFLINE_URL = '/tyson-pwa/index.html';
 
 // Asset yang di-cache saat install
 const PRECACHE_ASSETS = [
-  './index.html',
-  './manifest.json',
-  './icons/icon-72x72.png',
-  './icons/icon-96x96.png',
-  './icons/icon-128x128.png',
-  './icons/icon-144x144.png',
-  './icons/icon-152x152.png',
-  './icons/icon-192x192.png',
-  './icons/icon-384x384.png',
-  './icons/icon-512x512.png',
+  '/tyson-pwa/index.html',
+  '/tyson-pwa/manifest.json',
+  '/tyson-pwa/sw.js',
+  '/tyson-pwa/icons/icon-72x72.png',
+  '/tyson-pwa/icons/icon-96x96.png',
+  '/tyson-pwa/icons/icon-128x128.png',
+  '/tyson-pwa/icons/icon-144x144.png',
+  '/tyson-pwa/icons/icon-152x152.png',
+  '/tyson-pwa/icons/icon-192x192.png',
+  '/tyson-pwa/icons/icon-384x384.png',
+  '/tyson-pwa/icons/icon-512x512.png',
 ];
 
 // Font Google yang akan di-cache saat pertama kali diakses
